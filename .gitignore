@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.pkl
+*.ipynb_checkpoints
+*.log
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# Jupyter
+.ipynb_checkpoints/
+
+# 虛擬環境（若誤放在 repo 中）
+venv/
+.venv/
+
+# Data & output
+data/
+output/
+*.csv
+*.tsv
+*.jsonl
+*.tmp
+
+# Model files
+*.pt
+*.pth
+*.bin
+*.ckpt
+
+# Docker artifacts
+*.tar
+*.log
+.env
+.env.*
+
+# Remote container build context
+.devcontainer/.cache/
+
+# macOS 特有
+.DS_Store

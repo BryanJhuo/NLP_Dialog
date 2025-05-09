@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+  nlp-app:
+    build: .
+    container_name: nlp_dialogue
+    volumes:
+      - .:/app
+    tty: true
