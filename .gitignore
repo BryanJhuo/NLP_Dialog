@@ -17,14 +17,6 @@ __pycache__/
 venv/
 .venv/
 
-# Data & output
-data/
-output/
-*.csv
-*.tsv
-*.jsonl
-*.tmp
-
 # Model files
 *.pt
 *.pth
