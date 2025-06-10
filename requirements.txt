@@ -1,5 +1,7 @@
 pandas 
-transformers 
+transformers[torch] 
 scikit-learn 
 nltk
 gradio
+datasets
+torch
