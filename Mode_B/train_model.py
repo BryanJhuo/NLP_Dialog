@@ -200,11 +200,14 @@ def inference_example():
     sample_text = "No, I am ok, really."
     result = pipe(sample_text)
     print(f"Input Text: {sample_text}")
-    print("Inference Result:", result)
+    print("Inference Result:")
+    for res in result[0]:
+        print(res)
+    
     return 
 
 def main():
-    train_bert_emotion()
+    # train_bert_emotion()
     # inference_example()
     return
 

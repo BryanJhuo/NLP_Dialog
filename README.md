@@ -23,7 +23,7 @@ cd your-repo
     - 等待自動建置並開啟 container（會自動安裝 Python 環境與套件）
 
 ## Dataset
-#### processed_***.csv
+### processed_***.csv
 | dialogue_id | utterance_id | utterance | act | emotion | risk_score | risk_tags | risk_flag |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 8 | 10 | "Okay , I'll do it next time ." | 4 | 0 | 1.0 | ['perfunctory'] | False |
@@ -53,9 +53,14 @@ cd your-repo
  
 風險針對**敷衍**、**冷漠**和**逃避**。所以再後續功能判斷的時候，應該先以 emotions 為主，若 emotion 為 other，才去判斷該句話是否有**敷衍**、**冷漠**和**逃避**的行為，也就是再去看 risk_tag。
 
-#### test/train/validation.csv
+### test/train/validation.csv
 此為單純尚未處理的database。如果要用pandas讀入，要注意讀出每個element要去split。
 > 不懂可以問我，或者去看原 dataset 的網站。
+
+## Model 
+
+### Mode B
+Mode URL: [Google Drive](https://drive.google.com/drive/folders/1aSVFgjOU_aohikHp3eA3nCUQZqoED4sV?usp=sharing)
 
 ## References
 - DailyDialog: [HuggingFace](https://huggingface.co/datasets/roskoN/dailydialog)
