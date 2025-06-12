@@ -1,51 +1,30 @@
 import streamlit as st
-import sys
-import os
-# Ensure the parent directory is in the system path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from mode_a_page import mode_a_page
+from mode_b_page import mode_b_page
 
-from Mode_B import ModeBPredictor
-
-
-if "modeb" not in st.session_state:
-    st.session_state["modeb"] = ModeBPredictor(
-        emotion_model_path="./model/emotion_bert",
-        risk_model_path="./model/risk_bert"
+st.set_page_config(
+    page_title="NLP Dialog Analysis",
+    page_icon=":speech_balloon:",
+    layout="centered"
     )
 
+st.sidebar.title("功能選單")
+page = st.sidebar.radio("選擇功能模式", ("主畫面","Mode A：語意分類＋問題抽取", "Mode B：情緒偵測＋風險分析") )
 
-st.title("NLP Dialog Analysis - Mode B")
-st.write("請在下方輸入一段或多句英文對話，每一行代表一句話，然後點擊「分析」按鈕。")
-
-# Multi-line text input for user utterances
-user_input = st.text_area("請貼上對話紀錄(每行一句話):", height=200)
-
-if st.button("分析", type="primary") and user_input.strip():
-    st.subheader("分析結果")
-    utterances = [line.strip() for line in user_input.split('\n') if line.strip()]
-    results = []
-    
-    for utt in utterances:
-        try:
-            pred = st.session_state["modeb"].predict(utt)
-            results.append(pred)
+# Main page
+if page == "主畫面":
+    st.title("NLP Dialog Analysis 主畫面")
+    st.write("""
+        歡迎使用 NLP Chatlog Analysis。
         
-        except ValueError as e:
-            st.error(f"Error processing utterance '{utt}': {str(e)}")
-    
-    # Display results in a table format
-    if not results:
-        st.write("沒有可顯示的結果。請確保輸入的對話紀錄格式正確。")
-    else:
-        for i, res in enumerate(results):
-            st.markdown(f"**第 {i+1} 句: ** `{res['utterance']}`")
-            st.markdown(f"情緒預測： :blue[{res['emotion']}] （分數: {res['emotion_score']:.3f}）")
-            if res['emotion'] == "Other":
-                st.markdown(f"風險預測：:red[{res['risk']}]（分數: {res['risk_score']:.3f}）" if res["risk"] != "none" else "風險預測：:green[無明顯風險]")
-            st.divider()
+        請從左側選單選擇你要使用的功能模式：
+        - **Mode A**：語意分類與問題抽取
+        - **Mode B**：情緒偵測與風險分析
+    """)
+    st.image("https://cdn-icons-png.flaticon.com/512/3649/3649466.png", width=150)  # 任意logo
 
-else:
-    st.info("請輸入對話紀錄並點擊「分析」按鈕。")
+elif page == "Mode A：語意分類＋問題抽取":
+    mode_a_page()
 
-
-st.caption("@ 2024 NLP Dialog Analysis Team. Powered by Streamlit.")
+elif page == "Mode B：情緒偵測＋風險分析":
+    mode_b_page()
