@@ -1,9 +1,13 @@
 
 import os
 from transformers import pipeline
+from .call_llm_api import LLMAnalyzer
+
+API_KEY = "API-KEY"  # Replace
+MODEL_PATH = "./model"
 
 class ModeBPredictor:
-    def __init__(self, emotion_model_path, risk_model_path):
+    def __init__(self, emotion_model_path, risk_model_path, API_KEY=API_KEY):
         """
         Initializes the ModeBPredictor with paths to the emotion and risk models.
         Args:
@@ -39,6 +43,8 @@ class ModeBPredictor:
             2: "apathetic",
             3: "avoidant"
         }
+        # Initialize the LLM analyzer
+        self.llm_analyzer = LLMAnalyzer(API_KEY)
         return 
     
     def predict_emotion(self, utterance: str):
@@ -113,25 +119,45 @@ class ModeBPredictor:
             "risk_score": risk_pred['score'] if risk_pred else None,
             "risk_detail": risk_pred['detail'] if risk_pred else None,
         }
+    
+    def call_llm_sugestions(self, dialog_results):
+        """
+        Calls the LLM API to get suggestions based on the dialog results.
+        Args:
+            dialog_results (list): List of dictionaries containing dialog results.
+        Returns:
+            str: Suggestions from the LLM.
+        Raises:
+            ValueError: If dialog_results is empty or not a list.
+        """
+
+        if not isinstance(dialog_results, list) or not dialog_results:
+            raise ValueError("dialog_results must be a non-empty list.")
+
+        prompt = self.llm_analyzer.compose_prompt(dialog_results)
+        return self.llm_analyzer.call_openrouter(prompt)
+
 
 if __name__ == "__main__":
     print("This is Mode_B's main script.")
 
-    MODEL_PATH = "./model"
-
     predictor = ModeBPredictor(
         emotion_model_path=f"{MODEL_PATH}/emotion_bert",
-        risk_model_path=f"{MODEL_PATH}/risk_bert"
+        risk_model_path=f"{MODEL_PATH}/risk_bert",
+        API_KEY=API_KEY
     )
 
     utt = "No, I am okay, really. really."
 
-    print("==== Emotion Prediction ====")
-    print(predictor.predict_emotion(utt))
-    print()
+    result = predictor.predict(utt)
 
-    print("==== Risk Prediction ====")
-    print(predictor.predict_risk(utt))
-    print()
+    print("==== Prediction Result ====")
+    print(result)
+
+    # Call LLM for suggestions
+    dialog_results = [result]
+    suggestions = predictor.llm_analyzer.analyze(dialog_results)
+    print("==== LLM Suggestions ====")
+    print(suggestions)
 
     print("Done.")

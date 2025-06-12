@@ -22,6 +22,18 @@ cd your-repo
     - 輸入 Remote-Containers: Reopen in Container
     - 等待自動建置並開啟 container（會自動安裝 Python 環境與套件）
 
+## How to demo?
+> 我還沒測過 Docker Container 底下能不能 Demo
+需將路徑切換至專案底下後，輸入以下指令:
+```bash
+streamlit run app/main.py
+```
+
+### 注意事項
+1. 因為其中有使用到 **OpenRouter** 的 API_key，所以 Demo 需要將 API_key 替換到 `Mode_B/main.py` 的 `API_KEY` 中。
+2. 因為模型檔案大小的關係，我已將模型存放至 Google Drive 當中，需將模型下載後，先建立 `model` 資料夾後，貼上即可。
+> 不要問我為什麼不能確保第二點，死線中....
+
 ## Dataset
 ### processed_***.csv
 | dialogue_id | utterance_id | utterance | act | emotion | risk_score | risk_tags | risk_flag |
@@ -60,7 +72,8 @@ cd your-repo
 ## Model 
 
 ### Mode B
-Mode URL: [Google Drive](https://drive.google.com/drive/folders/1aSVFgjOU_aohikHp3eA3nCUQZqoED4sV?usp=sharing)
+Emotion Mode URL: [Google Drive (Emotion_Model)](https://drive.google.com/drive/folders/1aSVFgjOU_aohikHp3eA3nCUQZqoED4sV?usp=sharing)
+Risk Mode URL: [Google Drive (Risk_Model)](https://drive.google.com/drive/folders/1sCisyLqdFczfXUtb2iYQxxgrLTfFDUvO?usp=sharing)
 
 ## References
 - DailyDialog: [HuggingFace](https://huggingface.co/datasets/roskoN/dailydialog)
