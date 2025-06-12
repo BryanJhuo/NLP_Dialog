@@ -34,3 +34,6 @@ venv/
 
 # macOS 特有
 .DS_Store
+
+# model files
+model/
