@@ -3,7 +3,7 @@ import os
 from transformers import pipeline
 from .call_llm_api import LLMAnalyzer
 
-API_KEY = "API-KEY"  # Replace
+API_KEY = ""
 MODEL_PATH = "./model"
 
 class ModeBPredictor:

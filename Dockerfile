@@ -14,11 +14,11 @@ RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 # 安裝 Python 套件
-COPY requirements.txt .
+COPY requirements.txt ./
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # 複製原始碼
 COPY . .
 
 # 啟動應用程式（這裡你之後可以改成 streamlit、flask、測試程式等）
-CMD ["python", "app/main.py"]
+CMD ["streamlit", "run", "app/main.py", "--server.port=8501", "--server.address=0.0.0.0"]
