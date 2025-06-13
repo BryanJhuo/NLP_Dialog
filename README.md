@@ -1,33 +1,20 @@
 # NLP_Dialog
 
-## How to use or create environment ?
-
-### Fisrt time
-1. **安裝必要工具（只需一次）**
-    - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-    - [Visual Studio Code](https://code.visualstudio.com/)
-    - 安裝以下 VSCode 擴充套件：
-        - ✅ Remote - Containers
-        - ✅ Python
-
-2. **Clone 專案**
-```bash
-git clone https://github.com/your-org/your-repo.git
-cd your-repo
-```
-
-3. **開啟 VSCode 並啟用 Remote Container**
-    - 開啟專案資料夾
-    - 按下 F1 或 Ctrl+Shift+P
-    - 輸入 Remote-Containers: Reopen in Container
-    - 等待自動建置並開啟 container（會自動安裝 Python 環境與套件）
-
 ## How to demo?
-> 我還沒測過 Docker Container 底下能不能 Demo
+**請先確認是否有 `docker` 與 `docker compose`**
+
 需將路徑切換至專案底下後，輸入以下指令:
+- 部屬 Demo
 ```bash
-streamlit run app/main.py
+docker compose up --build
 ```
+
+- 停止部屬
+```bash
+docker compose down
+```
+
+> 第一次跑時會比較久
 
 ### 注意事項
 1. 因為其中有使用到 **OpenRouter** 的 API_key，所以 Demo 需要將 API_key 替換到 `Mode_B/main.py` 的 `API_KEY` 中。
@@ -72,8 +59,9 @@ streamlit run app/main.py
 ## Model 
 
 ### Mode B
-Emotion Mode URL: [Google Drive (Emotion_Model)](https://drive.google.com/drive/folders/1aSVFgjOU_aohikHp3eA3nCUQZqoED4sV?usp=sharing)
-Risk Mode URL: [Google Drive (Risk_Model)](https://drive.google.com/drive/folders/1sCisyLqdFczfXUtb2iYQxxgrLTfFDUvO?usp=sharing)
+Emotion Mode URL: [Google Drive (Emotion_Model)](https://drive.google.com/drive/folders/1aSVFgjOU_aohikHp3eA3nCUQZqoED4sV?usp=sharing)  
+Risk Mode URL: [Google Drive (Risk_Model)](https://drive.google.com/drive/folders/1sCisyLqdFczfXUtb2iYQxxgrLTfFDUvO?usp=sharing)  
+Multitask URL: [Google Drive (Multitask)](https://drive.google.com/drive/folders/1vzNIK9GpbLjKG2k9J-UwIDLZOI5ry6lY?usp=sharing)
 
 ## References
 - DailyDialog: [HuggingFace](https://huggingface.co/datasets/roskoN/dailydialog)
